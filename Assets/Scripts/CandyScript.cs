@@ -7,6 +7,8 @@ public class CandyScript : MonoBehaviour {
 	public string SubType;
 	public string TrashName;
 	
+	//testing Git
+	
 	// Use this for initialization
 	void Start () {
 	
