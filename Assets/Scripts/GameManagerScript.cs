@@ -29,6 +29,8 @@ public class GameManagerScript : MonoBehaviour {
 	public int CandyRemaining;
 	public int MissesAllowed = 3;
 	
+	public static int TotalScore;
+	
 	private int startingAmount;
 	
 	public AudioClip sfxCorrect;
@@ -162,5 +164,10 @@ public class GameManagerScript : MonoBehaviour {
 		Score = 0;
 		Correct = 0;
 		Incorrect = 0;
+	}
+	
+	public void setTotalScore()
+	{
+		TotalScore += Score;
 	}
 }

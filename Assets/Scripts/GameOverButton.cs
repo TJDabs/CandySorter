@@ -44,9 +44,19 @@ public class GameOverButton : MonoBehaviour {
 	{
 		if(GameOverStatus == "Won")
 		{
+			gameScript.setTotalScore();
 			gameScript.Reset();
 			GameManagerScript.CurrentLevel ++;
-			Application.LoadLevel("Level" + GameManagerScript.CurrentLevel);
+			Debug.Log("Total Score: " + GameManagerScript.TotalScore);
+			Debug.Log("Current Lvl: " + GameManagerScript.CurrentLevel);
+			if(GameManagerScript.CurrentLevel == 11)
+			{
+				Application.LoadLevel("GameOver");
+			}
+			else
+			{
+				Application.LoadLevel("Level" + GameManagerScript.CurrentLevel);
+			}
 		}
 		else
 		{

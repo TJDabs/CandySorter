@@ -57,6 +57,17 @@ public class BucketScript : MonoBehaviour {
 					IncorrectType();
 				}
 			}
+			else if(BucketType == "None") //Only Check SubType
+			{
+				if (BucketSubType == collision.gameObject.GetComponent<CandyScript>().SubType)
+				{
+					CorrectType();
+				}
+				else
+				{
+					IncorrectType();
+				}
+			}
 			else //Check Type and SubType
 			{
 				if (BucketType == collision.gameObject.GetComponent<CandyScript>().Type && BucketSubType == collision.gameObject.GetComponent<CandyScript>().SubType)
