@@ -10,6 +10,7 @@ public class GameManagerScript : MonoBehaviour {
 	public tk2dTextMesh txtIncorrect;
 	public tk2dTextMesh txtCandyRemaining;
 	public tk2dTextMesh txtGameOverMsg;
+	public tk2dFontData myFont;
 	
 	public GameObject gameOverButton;
 	public GameObject ChatWindow;
@@ -18,7 +19,7 @@ public class GameManagerScript : MonoBehaviour {
 	
 	private float timer;
 	private bool stopGame;
-	private bool chatUp;
+	public static bool chatUp;
 	private bool startup;
 	
 	public static int CurrentLevel = 1;
@@ -43,6 +44,9 @@ public class GameManagerScript : MonoBehaviour {
 		stopGame = false;
 		timer = 1.5f;
 		startingAmount = CandyRemaining;
+		//txtGameOverMsg.font = myFont;
+		//txtGameOverMsg.scale = new Vector3(1,1,1);
+		
 		spawnLocation = new Vector3(-30, 0, 0);
 		spawnCandie();
 	}
@@ -81,16 +85,16 @@ public class GameManagerScript : MonoBehaviour {
 				}
 			}
 			
-			txtScore.text = string.Format("Score: " + Score);
+			txtScore.text = string.Format("S: " + Score);
 			txtScore.Commit();
 		
-			txtCorrect.text = string.Format("Correct: " + Correct);
+			txtCorrect.text = string.Format("C: " + Correct);
 			txtCorrect.Commit();
 		
-			txtIncorrect.text = string.Format("Missed: " + Incorrect);
+			txtIncorrect.text = string.Format("M: " + Incorrect);
 			txtIncorrect.Commit();
 		
-			txtCandyRemaining.text = string.Format("Candy Remaining: " + CandyRemaining);
+			txtCandyRemaining.text = string.Format("R: " + CandyRemaining);
 			txtCandyRemaining.Commit();
 		}
 	}

@@ -13,7 +13,10 @@ public class ButtonClick : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(GameManagerScript.chatUp == false)
+		{
+			gameObject.GetComponent<tk2dUIItem>().enabled = true;
+		}
 	}
 	
 	void OnEnable()
