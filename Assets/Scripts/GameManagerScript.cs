@@ -20,25 +20,43 @@ public class GameManagerScript : MonoBehaviour {
 	private float timer;
 	private bool stopGame;
 	public static bool chatUp;
+	public AudioClip btnSound;
 	private bool startup;
 	
 	public static int CurrentLevel = 1;
+	public static int[] lvlScores = new int[11];
+	
 	public static int Score;
+	public static int TotalScore;
+	
 	public static int Correct;
 	public static int Incorrect;
 	public static string btnStatus;
 	public int CandyRemaining;
 	public int MissesAllowed = 3;
 	
-	public static int TotalScore;
-	
 	private int startingAmount;
 	
 	public AudioClip sfxCorrect;
 	public AudioClip sfxIncorrect;
+	public AudioClip sfxLevelUp;
+	public AudioClip sfxGameOver;
 	
 	// Use this for initialization
 	void Start () {
+		Debug.Log("Current Level: " + CurrentLevel);
+		Debug.Log("Total: " + TotalScore);
+		Debug.Log("1: " + lvlScores[1]);
+		Debug.Log("2: " + lvlScores[2]);
+		Debug.Log("3: " + lvlScores[3]);
+		Debug.Log("4: " + lvlScores[4]);
+		Debug.Log("5: " + lvlScores[5]);
+		Debug.Log("6: " + lvlScores[6]);
+		Debug.Log("7: " + lvlScores[7]);
+		Debug.Log("8: " + lvlScores[8]);
+		Debug.Log("9: " + lvlScores[9]);
+		Debug.Log("10: " + lvlScores[10]);
+		
 		startup = true;
 		chatUp = true;
 		stopGame = false;
@@ -85,17 +103,22 @@ public class GameManagerScript : MonoBehaviour {
 				}
 			}
 			
-			txtScore.text = string.Format("S: " + Score);
+			txtScore.text = string.Format("" + lvlScores[CurrentLevel]);
 			txtScore.Commit();
 		
-			txtCorrect.text = string.Format("C: " + Correct);
+			txtCorrect.text = string.Format("" + Correct);
 			txtCorrect.Commit();
 		
-			txtIncorrect.text = string.Format("M: " + Incorrect);
+			txtIncorrect.text = string.Format("" + Incorrect);
 			txtIncorrect.Commit();
 		
-			txtCandyRemaining.text = string.Format("R: " + CandyRemaining);
+			txtCandyRemaining.text = string.Format("" + CandyRemaining);
 			txtCandyRemaining.Commit();
+		}
+		//Backdoor
+		if(Input.GetButtonDown("Jump"))
+		{
+			GameOver(true);
 		}
 	}
 	
@@ -113,6 +136,7 @@ public class GameManagerScript : MonoBehaviour {
 		{
 			startup = false;
 			ChatWindow.SetActive(false);
+			audio.PlayOneShot(btnSound);
 			Time.timeScale = 1.0f;
 		}
 	}
@@ -130,13 +154,13 @@ public class GameManagerScript : MonoBehaviour {
 	{
 		if(CorrectCandy == true)
 		{
-			Score += 10;
+			lvlScores[CurrentLevel] += 10;
 			Correct ++;
 			audio.PlayOneShot(sfxCorrect);
 		}
 		else
 		{
-			Score -= 5;
+			lvlScores[CurrentLevel] -= 5;
 			Incorrect ++;
 			audio.PlayOneShot(sfxIncorrect);
 		}
@@ -150,12 +174,14 @@ public class GameManagerScript : MonoBehaviour {
 		
 		if(Won == true)
 		{
+			audio.PlayOneShot(sfxLevelUp);
 			GameOverButton.GameOverStatus = "Won";
 			txtGameOverMsg.text = string.Format("Order Completed!");
 			txtGameOverMsg.Commit();
 		}
 		else
 		{
+			audio.PlayOneShot(sfxGameOver);
 			GameOverButton.GameOverStatus = "Lost";
 			txtGameOverMsg.text = string.Format("Order Failed");
 			txtGameOverMsg.Commit();
@@ -165,13 +191,17 @@ public class GameManagerScript : MonoBehaviour {
 	public void Reset()
 	{
 		Time.timeScale = 1.0f;
-		Score = 0;
+		lvlScores[CurrentLevel] = 0;
 		Correct = 0;
 		Incorrect = 0;
 	}
 	
 	public void setTotalScore()
 	{
-		TotalScore += Score;
+		Time.timeScale = 1.0f;
+		TotalScore += lvlScores[CurrentLevel];
+		Correct = 0;
+		Incorrect = 0;
 	}
+	
 }

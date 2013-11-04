@@ -29,6 +29,10 @@ public class RestartButton : MonoBehaviour {
 	{
 		GameManagerScript.TotalScore = 0;
 		GameManagerScript.CurrentLevel = 1;
-		Application.LoadLevel("Title");
+		for(int i = 1; i < GameManagerScript.lvlScores.Length; i++)
+		{
+			GameManagerScript.lvlScores[i] = 0;
+		}
+		Application.LoadLevel("Menu");
 	}
 }

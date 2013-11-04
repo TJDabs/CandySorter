@@ -43,7 +43,7 @@ public class MouseDrag : MonoBehaviour {
 		
 		Vector3 currentPos = new Vector3(0,0,0);
 		currentPos = transform.position;
-		transform.position = new Vector3(currentPos.x, currentPos.y, -2);
+		transform.position = new Vector3(currentPos.x, currentPos.y, -3);
 		
 		screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 		
@@ -67,7 +67,7 @@ public class MouseDrag : MonoBehaviour {
 		rigidbody.useGravity = true;
 		Vector3 currentPos = new Vector3(0,0,0);
 			currentPos = transform.position;
-			transform.position = new Vector3(currentPos.x, currentPos.y, -1);
+			transform.position = new Vector3(currentPos.x, currentPos.y, -1.1f);
 		/*if(transform.position.y <= -4.5)
 		{
 			Vector3 currentPos = new Vector3(0,0,0);
